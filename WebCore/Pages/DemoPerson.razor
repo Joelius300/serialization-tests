@@ -1,0 +1,15 @@
+﻿@page "/demoPerson"
+
+<h1>Demo person</h1>
+<Serializer ObjectToSerialize="@ToSerialize" />
+
+@code {
+public Object ToSerialize { get; private set; }
+
+protected sealed override void OnInit()
+{
+    ToSerialize = Utils.DemoObjects.DummyPerson;
+
+    base.OnInit();
+}
+}

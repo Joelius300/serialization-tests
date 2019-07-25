@@ -1,0 +1,20 @@
+﻿@page "/annonymous"
+
+<h1>Annonymous</h1>
+<Serializer ObjectToSerialize="@ToSerialize" />
+
+@code {
+public Object ToSerialize { get; private set; }
+
+protected sealed override void OnInit()
+{
+    ToSerialize = new
+    {
+        FirstName = "My Name",
+        MiddleName = default(object),
+        LastName = "My last name"
+    };
+
+    base.OnInit();
+}
+}

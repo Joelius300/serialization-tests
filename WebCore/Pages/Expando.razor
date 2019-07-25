@@ -1,0 +1,22 @@
+﻿@page "/expando"
+
+@using System.Dynamic;
+
+<h1>ExpandoObject</h1>
+<Serializer ObjectToSerialize="@ToSerialize" />
+
+@code {
+public Object ToSerialize { get; private set; }
+
+protected sealed override void OnInit()
+{
+    dynamic exp = new ExpandoObject();
+    exp.FirstName = "My Name";
+    exp.MiddleName = default(object);
+    exp.LastName = "My last name";
+    
+    ToSerialize = exp;
+
+    base.OnInit();
+}
+}

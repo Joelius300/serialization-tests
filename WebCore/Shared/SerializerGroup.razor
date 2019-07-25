@@ -1,0 +1,9 @@
+﻿<div class="serializer-group">
+    <h3>@Title</h3>
+    <textarea readonly="readonly" @bind="@Text" />
+</div>
+
+@code{
+[Parameter] protected string Title { get; set; }
+[Parameter] protected string Text { get; set; }
+}

@@ -1,0 +1,15 @@
+﻿@page "/mockConfig"
+
+<h1>Mock config</h1>
+<Serializer ObjectToSerialize="@ToSerialize" />
+
+@code {
+public Object ToSerialize { get; private set; }
+
+protected sealed override void OnInit()
+{
+    ToSerialize = Utils.DemoObjects.DummyConfig;
+
+    base.OnInit();
+}
+}
