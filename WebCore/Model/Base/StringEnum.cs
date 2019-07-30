@@ -1,8 +1,5 @@
-﻿using Newtonsoft.Json;
-
-namespace WebCore.Model
+﻿namespace WebCore.Model.Base
 {
-    [JsonConverter(typeof(JsonStringEnumConverter))]
     public abstract class StringEnum
     {
         private readonly string _value;

@@ -1,11 +1,8 @@
 ﻿using Newtonsoft.Json;
 
-namespace WebCore.Model
+namespace WebCore.Model.Base.Newtonsoft
 {
-    /// <summary>
-    /// JsonConverter for converting and writing a StringEnum value. This JsonConverter can only write.
-    /// </summary>
-    internal class JsonStringEnumConverter : JsonWriteOnlyConverter<StringEnum>
+    internal class StringEnumConverter : WriteOnlyConverterNewtonsoft<StringEnum>
     {
         public override void WriteJson(JsonWriter writer, StringEnum value, JsonSerializer serializer)
         {

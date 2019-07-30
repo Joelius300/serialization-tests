@@ -1,5 +1,20 @@
 ﻿@page "/"
 
-<h1>Hello, world!</h1>
+<h1>Inner</h1>
+<Serializer ObjectToSerialize="@Inner" />
 
-Welcome to your new app.
+<h1>Outer</h1>
+<Serializer ObjectToSerialize="@Outer"/>
+
+@code {
+    public Object Inner { get; private set; }
+    public Object Outer { get; private set; }
+
+    protected sealed override void OnInit()
+    {
+        Inner = Utils.DemoObjects.ContainerBug.DummyInnerContainer;
+        Outer = Utils.DemoObjects.ContainerBug.DummyOuterContainer;
+
+        base.OnInit();
+    }
+}

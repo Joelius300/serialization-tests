@@ -1,11 +1,9 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
+using Newtonsoft.Json;
 
-namespace WebCore.Model
+namespace WebCore.Model.Base
 {
-    internal abstract class JsonWriteOnlyConverter<T> : JsonConverter<T>
+    internal abstract class WriteOnlyConverterNewtonsoft<T> : JsonConverter<T>
     {
         public sealed override bool CanRead => false;
         public sealed override bool CanWrite => true;

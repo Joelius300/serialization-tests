@@ -1,52 +1,53 @@
-﻿@using System.Text;
+﻿@using Utils;
+@using System.Text;
 @using System.Text.Json;
 @using System.Text.Json.Serialization;
+@inject ExceptionStringHelper ex
 
-<SerializerGroup Title="IJSRuntime.InvokeAsync (c#) and JSON.stringify (js)" Text="@Via_IJSRuntime" />
 <SerializerGroup Title="Newtonsoft.Json.JsonConvert" Text="@Via_JsonDotNet" />
+<SerializerGroup Title="IJSRuntime.InvokeAsync (c#) and JSON.stringify (js)" Text="@Via_IJSRuntime" CompareAgainst="@Via_JsonDotNet"/>
 <SerializerGroup Title="System.Text.Json.JsonSerializer" Text="@Via_Text_Json" />
 
 @code {
-[Parameter]
-public object ObjectToSerialize { get; set; }
+    [Parameter]
+    public object ObjectToSerialize { get; set; }
 
-[Inject]
-protected IJSRuntime JSRuntime { get; set; }
+    [Inject]
+    protected IJSRuntime JSRuntime { get; set; }
 
-public string Via_IJSRuntime { get; set; }
-public string Via_Text_Json { get; set; }
-public string Via_JsonDotNet { get; set; }
+    public string Via_IJSRuntime { get; set; }
+    public string Via_Text_Json { get; set; }
+    public string Via_JsonDotNet { get; set; }
 
-protected override async Task OnInitAsync()
-{
-    Via_IJSRuntime = await ResultOrExceptionMessage(() => JSRuntime.InvokeAsync<string>("JSON.stringify", ObjectToSerialize));
-    Via_JsonDotNet = ResultOrExceptionMessage(() => Newtonsoft.Json.JsonConvert.SerializeObject(ObjectToSerialize));
-    Via_Text_Json = ResultOrExceptionMessage(() => JsonSerializer.Serialize(ObjectToSerialize));
-    
-    await base.OnInitAsync();
-}
-
-private string ResultOrExceptionMessage(Func<string> getResult)
-{
-    try
+    protected override async Task OnInitAsync()
     {
-        return getResult();
-    }
-    catch (Exception e)
-    {
-        return e.Message;
-    }
-}
+        Via_JsonDotNet = ex.ResultOrExceptionMessage(SerializeNewtonsoft);
+        //Via_JsonDotNet = ex.ResultOrExceptionMessage(() => Newtonsoft.Json.JsonConvert.SerializeObject(ObjectToSerialize));
+        Via_IJSRuntime = await ex.ResultOrExceptionMessage(() => JSRuntime.InvokeAsync<string>("JSON.stringify", ObjectToSerialize));
+        Via_Text_Json = ex.ResultOrExceptionMessage(SerializeSystemTextJson);
+        //Via_Text_Json = ex.ResultOrExceptionMessage(() => JsonSerializer.Serialize(ObjectToSerialize));
 
-private Task<string> ResultOrExceptionMessage(Func<Task<string>> getResult)
-{
-    try
-    {
-        return getResult();
+        await base.OnInitAsync();
+
+        string SerializeNewtonsoft() => Newtonsoft.Json.JsonConvert.SerializeObject(
+            ObjectToSerialize,
+            new Newtonsoft.Json.JsonSerializerSettings
+            {
+                NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
+                ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver()
+            });
+
+        string SerializeSystemTextJson()
+        {
+            var options = new JsonSerializerOptions
+            {
+                IgnoreNullValues = true,
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            };
+
+            options.Converters.Add(new Model.Desired.ObjectEnumConverter());
+
+            return JsonSerializer.Serialize(ObjectToSerialize, options);
+        }
     }
-    catch (Exception e)
-    {
-        return Task.FromResult(e.Message);
-    }
-}
 }

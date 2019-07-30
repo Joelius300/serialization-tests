@@ -1,6 +1,6 @@
-﻿@page "/demoPerson"
+﻿@page "/mockConfigWorkaround"
 
-<h1>Typed person</h1>
+<h1>Mock config (workaround)</h1>
 <Serializer ObjectToSerialize="@ToSerialize" />
 
 @code {
@@ -8,7 +8,7 @@ public Object ToSerialize { get; private set; }
 
 protected sealed override void OnInit()
 {
-    ToSerialize = Utils.DemoObjects.DummyPerson;
+    ToSerialize = Utils.DemoObjects.Workaround.DummyBaseConfig;
 
     base.OnInit();
 }

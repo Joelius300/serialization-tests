@@ -1,12 +1,5 @@
-﻿using Newtonsoft.Json;
-
-namespace WebCore.Model
+﻿namespace WebCore.Model.Base
 {
-    /// <summary>
-    /// Inherit this class if you are in need of a pseudo-Enum which can hold values of different kinds (eg. string, double and bool)
-    /// <para>Do not </para>
-    /// </summary>
-    [JsonConverter(typeof(JsonObjectEnumConverter))]
     public abstract class ObjectEnum
     {
         internal object Value { get; }

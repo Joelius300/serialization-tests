@@ -1,9 +1,35 @@
 ﻿<div class="serializer-group">
     <h3>@Title</h3>
-    <textarea readonly="readonly" @bind="@Text" />
+    <textarea style="@BackgroundStyleString" readonly="readonly" @bind="@Text" />
 </div>
 
 @code{
-[Parameter] protected string Title { get; set; }
-[Parameter] protected string Text { get; set; }
+    [Parameter] protected string Title { get; set; }
+    [Parameter] protected string Text { get; set; }
+    [Parameter] protected string CompareAgainst { get; set; }
+
+    private string BackgroundStyleString = "";
+    private string BGColor
+    {
+        get => BackgroundStyleString.Substring(17); // this doesn't really matter, its just demonstration anyway
+        set => BackgroundStyleString = $"background-color:{value}";
+    }
+
+    private bool _manualRerender = false;
+
+    protected override void OnAfterRender()
+    {
+        base.OnAfterRender();
+
+        if (_manualRerender) return;
+        if(CompareAgainst != null)
+        {
+            if (Text.Equals(CompareAgainst)) BGColor = "green";
+            else BGColor = "lightcoral";
+        }
+
+        _manualRerender = true;
+        base.StateHasChanged();
+        _manualRerender = false;
+    }
 }

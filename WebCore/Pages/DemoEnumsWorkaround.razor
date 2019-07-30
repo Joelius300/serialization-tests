@@ -1,6 +1,6 @@
-﻿@page "/mockConfig"
+﻿@page "/demoEnumsWorkaround"
 
-<h1>Mock config</h1>
+<h1>Enums (workaround)</h1>
 <Serializer ObjectToSerialize="@ToSerialize" />
 
 @code {
@@ -8,7 +8,7 @@ public Object ToSerialize { get; private set; }
 
 protected sealed override void OnInit()
 {
-    ToSerialize = Utils.DemoObjects.DummyConfig;
+    ToSerialize = Utils.DemoObjects.Workaround.DummyEnums;
 
     base.OnInit();
 }
