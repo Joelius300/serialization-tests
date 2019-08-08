@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace WebCore.Model.Workaround
 {
-    [System.Text.Json.Serialization.JsonConverter(typeof(MyStringEnumConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(StringEnumConverter<MyStringEnum>))]
     public class MyStringEnum : StringEnum
     {
         public static MyStringEnum Low => new MyStringEnum("##low##");

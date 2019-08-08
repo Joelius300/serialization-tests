@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace WebCore.Model.Workaround
 {
-    [System.Text.Json.Serialization.JsonConverter(typeof(MyObjectEnumConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(ObjectEnumConverter<MyObjectEnum>))]
     public class MyObjectEnum : ObjectEnum
     {
         public static MyObjectEnum ExampleString => new MyObjectEnum("Example-workaround");
