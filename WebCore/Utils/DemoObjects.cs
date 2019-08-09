@@ -25,7 +25,10 @@ namespace WebCore.Utils
             FirstName = "Tom",
             MiddleName = null,
             LastName = "Taylor",
-            Gender = Gender.Male
+            Gender = Gender.Male,
+
+            FavouriteColors = new Model.Desired.IndexableOption<string>(new[] { "Green", "Blue", "Red"}),
+            NumberOrNumbers = new Model.Desired.IndexableOption<int>(6)
         };
 
         private static SimplesContainer GetDummySimples() => 

@@ -11,5 +11,8 @@ namespace WebCore.Model.Base
         public string MiddleName { get; set; }
         public string LastName { get; set; }
         public Gender Gender { get; set; }
+
+        public Desired.IndexableOption<string> FavouriteColors { get; set; }
+        public Desired.IndexableOption<int> NumberOrNumbers { get; set; }
     }
 }
