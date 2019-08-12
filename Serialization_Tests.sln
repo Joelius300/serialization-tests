@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.29021.104
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCore", "WebCore\WebCore.csproj", "{EBC23D8C-3EC1-4038-BD84-7586AB9322B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolymorphicSystemTextJsonTests", "PolymorphicSystemTextJsonTests\PolymorphicSystemTextJsonTests.csproj", "{0880DF6C-D55C-453B-AFEB-F6F2B2F0C4A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PolymorphicSystemTextJsonTests", "PolymorphicSystemTextJsonTests\PolymorphicSystemTextJsonTests.csproj", "{0880DF6C-D55C-453B-AFEB-F6F2B2F0C4A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IndexableOptionTests", "IndexableOptionTests\IndexableOptionTests.csproj", "{01B46DD8-44F9-4562-8AFD-CE70F5F8A7BB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{0880DF6C-D55C-453B-AFEB-F6F2B2F0C4A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0880DF6C-D55C-453B-AFEB-F6F2B2F0C4A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0880DF6C-D55C-453B-AFEB-F6F2B2F0C4A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01B46DD8-44F9-4562-8AFD-CE70F5F8A7BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01B46DD8-44F9-4562-8AFD-CE70F5F8A7BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01B46DD8-44F9-4562-8AFD-CE70F5F8A7BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01B46DD8-44F9-4562-8AFD-CE70F5F8A7BB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
