@@ -7,19 +7,19 @@ using Xunit;
 
 namespace IndexableOptionTests
 {
-    public class IndexableOptionWrappedTest
+    public class IndexableOptioneWithBaseWrappedTest
     {
         [Fact]
-        public void Config_NothingCustom()
+        public void ConfigWithBase_NothingCustom()
         {
             // arrange
             string stringVal = "StringValue";
             int[] intVals = new[] { 7, 1, 5 };
 
-            IndexableOption<string> stringOption = new IndexableOption<string>(stringVal);
-            IndexableOption<int> intOption = new IndexableOption<int>(intVals);
+            IndexableOptionWithBase<string> stringOption = new IndexableOptionWithBase<string>(stringVal);
+            IndexableOptionWithBase<int> intOption = new IndexableOptionWithBase<int>(intVals);
 
-            Config config = new Config
+            ConfigWithBase config = new ConfigWithBase
             {
                 BackgroundColor = stringOption,
                 BorderWidth = intOption
@@ -39,16 +39,16 @@ namespace IndexableOptionTests
         }
 
         [Fact]
-        public void Config_WithSerializer_Desired()
+        public void ConfigWithBase_WithSerializer_Desired()
         {
             // arrange
             string stringVal = "StringValue";
             int[] intVals = new[] { 7, 1, 5 };
 
-            IndexableOption<string> stringOption = new IndexableOption<string>(stringVal);
-            IndexableOption<int> intOption = new IndexableOption<int>(intVals);
+            IndexableOptionWithBase<string> stringOption = new IndexableOptionWithBase<string>(stringVal);
+            IndexableOptionWithBase<int> intOption = new IndexableOptionWithBase<int>(intVals);
 
-            Config config = new Config
+            ConfigWithBase config = new ConfigWithBase
             {
                 BackgroundColor = stringOption,
                 BorderWidth = intOption
@@ -69,24 +69,23 @@ namespace IndexableOptionTests
         }
 
         [Fact]
-        public void Config_WithSerializer_GenericAdded()
+        public void ConfigWithBase_WithSerializer_BaseAdded()
         {
             // arrange
             string stringVal = "StringValue";
             int[] intVals = new[] { 7, 1, 5 };
 
-            IndexableOption<string> stringOption = new IndexableOption<string>(stringVal);
-            IndexableOption<int> intOption = new IndexableOption<int>(intVals);
+            IndexableOptionWithBase<string> stringOption = new IndexableOptionWithBase<string>(stringVal);
+            IndexableOptionWithBase<int> intOption = new IndexableOptionWithBase<int>(intVals);
 
-            Config config = new Config
+            ConfigWithBase config = new ConfigWithBase
             {
                 BackgroundColor = stringOption,
                 BorderWidth = intOption
             };
 
             var serializerOptions = new JsonSerializerOptions();
-            serializerOptions.Converters.Add(new IndexableOptionConverterGeneric<int>());
-            serializerOptions.Converters.Add(new IndexableOptionConverterGeneric<string>());
+            serializerOptions.Converters.Add(new IndexableOptionBaseConverter());
 
             // act
             string configJson = JsonSerializer.Serialize(config, serializerOptions);

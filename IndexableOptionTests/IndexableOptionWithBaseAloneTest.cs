@@ -7,16 +7,16 @@ using Xunit;
 
 namespace IndexableOptionTests
 {
-    public class IndexableOptionAloneTest
+    public class IndexableOptionWithBaseAloneTest
     {
         #region Single value
 
         [Fact]
-        public void IndexableOptionSingleValue_NothingCustom()
+        public void IndexableOptionWithBaseSingleValue_NothingCustom()
         {
             // arrange
             string stringVal = "StringValue";
-            IndexableOption<string> option = new IndexableOption<string>(stringVal);
+            IndexableOptionWithBase<string> option = new IndexableOptionWithBase<string>(stringVal);
             var serializerOptions = new JsonSerializerOptions();
 
             // act
@@ -29,11 +29,11 @@ namespace IndexableOptionTests
         }
 
         [Fact]
-        public void IndexableOptionSingleValue_WithSerializer_Desired()
+        public void IndexableOptionWithBaseSingleValue_WithSerializer_Desired()
         {
             // arrange
             string stringVal = "StringValue";
-            IndexableOption<string> option = new IndexableOption<string>(stringVal);
+            IndexableOptionWithBase<string> option = new IndexableOptionWithBase<string>(stringVal);
 
             var serializerOptions = new JsonSerializerOptions();
             // serializerOptions.Converters.Add(...);
@@ -47,14 +47,14 @@ namespace IndexableOptionTests
         }
 
         [Fact]
-        public void IndexableOptionSingleValue_WithSerializer_GenericAdded()
+        public void IndexableOptionWithBaseSingleValue_WithSerializer_BaseAdded()
         {
             // arrange
             string stringVal = "StringValue";
-            IndexableOption<string> option = new IndexableOption<string>(stringVal);
+            IndexableOptionWithBase<string> option = new IndexableOptionWithBase<string>(stringVal);
 
             var serializerOptions = new JsonSerializerOptions();
-            serializerOptions.Converters.Add(new IndexableOptionConverterGeneric<string>());
+            serializerOptions.Converters.Add(new IndexableOptionBaseConverter());
 
             // act
             string optionJson = JsonSerializer.Serialize(option, serializerOptions);
@@ -69,11 +69,11 @@ namespace IndexableOptionTests
         #region Multiple values
 
         [Fact]
-        public void IndexableOptionMultipleValues_NothingCustom()
+        public void IndexableOptionWithBaseMultipleValues_NothingCustom()
         {
             // arrange
             int[] intVals = new[] { 1, 2, 3, 9 };
-            IndexableOption<int> option = new IndexableOption<int>(intVals);
+            IndexableOptionWithBase<int> option = new IndexableOptionWithBase<int>(intVals);
             var serializerOptions = new JsonSerializerOptions();
 
             // act
@@ -86,11 +86,11 @@ namespace IndexableOptionTests
         }
 
         [Fact]
-        public void IndexableOptionMultipleValues_WithSerializer_Desired()
+        public void IndexableOptionWithBaseMultipleValues_WithSerializer_Desired()
         {
             // arrange
             int[] intVals = new[] { 1, 2, 3, 9 };
-            IndexableOption<int> option = new IndexableOption<int>(intVals);
+            IndexableOptionWithBase<int> option = new IndexableOptionWithBase<int>(intVals);
             var serializerOptions = new JsonSerializerOptions();
             // serializerOptions.Converters.Add(...);
 
@@ -103,13 +103,13 @@ namespace IndexableOptionTests
         }
 
         [Fact]
-        public void IndexableOptionMultipleValues_WithSerializer_GenericAdded()
+        public void IndexableOptionWithBaseMultipleValues_WithSerializer_BaseAdded()
         {
             // arrange
             int[] intVals = new[] { 1, 2, 3, 9 };
-            IndexableOption<int> option = new IndexableOption<int>(intVals);
+            IndexableOptionWithBase<int> option = new IndexableOptionWithBase<int>(intVals);
             var serializerOptions = new JsonSerializerOptions();
-            serializerOptions.Converters.Add(new IndexableOptionConverterGeneric<int>());
+            serializerOptions.Converters.Add(new IndexableOptionBaseConverter());
 
             // act
             string optionJson = JsonSerializer.Serialize(option, serializerOptions);
