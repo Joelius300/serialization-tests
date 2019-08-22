@@ -98,5 +98,35 @@ namespace IndexableOptionTests
             Assert.Contains(@$"""BackgroundColor"":{rawStringJson}", configJson);
             Assert.Contains(@$"""BorderWidth"":{rawIntJson}", configJson);
         }
+
+        [Fact]
+        public void Config_WithSerializer_Newtonsoft_Addded()
+        {
+            // arrange
+            string stringVal = "StringValue";
+            int[] intVals = new[] { 7, 1, 5 };
+
+            IndexableOption<string> stringOption = new IndexableOption<string>(stringVal);
+            IndexableOption<int> intOption = new IndexableOption<int>(intVals);
+
+            Config config = new Config
+            {
+                BackgroundColor = stringOption,
+                BorderWidth = intOption
+            };
+
+            var serializerOptions = new Newtonsoft.Json.JsonSerializerSettings();
+            serializerOptions.Converters.Add(new IndexableOptionConverterNewtonsoft());
+
+            // act
+            string configJson = Newtonsoft.Json.JsonConvert.SerializeObject(config, serializerOptions);
+
+            string rawStringJson = Newtonsoft.Json.JsonConvert.SerializeObject(stringVal, serializerOptions);
+            string rawIntJson = Newtonsoft.Json.JsonConvert.SerializeObject(intVals, serializerOptions);
+
+            // assert
+            Assert.Contains(@$"""BackgroundColor"":{rawStringJson}", configJson);
+            Assert.Contains(@$"""BorderWidth"":{rawIntJson}", configJson);
+        }
     }
 }

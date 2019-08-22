@@ -64,6 +64,23 @@ namespace IndexableOptionTests
             Assert.Equal(rawJson, optionJson);
         }
 
+        [Fact]
+        public void IndexableOptionSingleValue_WithSerializer_Newtonsoft_Added()
+        {
+            // arrange
+            string stringVal = "StringValue";
+            IndexableOption<string> option = new IndexableOption<string>(stringVal);
+            Newtonsoft.Json.JsonSerializerSettings settings = new Newtonsoft.Json.JsonSerializerSettings();
+            settings.Converters.Add(new IndexableOptionConverterNewtonsoft());
+
+            // act
+            string optionJson = Newtonsoft.Json.JsonConvert.SerializeObject(option, settings);
+            string rawJson = Newtonsoft.Json.JsonConvert.SerializeObject(stringVal, settings);
+
+            // assert
+            Assert.Equal(rawJson, optionJson);
+        }
+
         #endregion
 
         #region Multiple values
@@ -114,6 +131,23 @@ namespace IndexableOptionTests
             // act
             string optionJson = JsonSerializer.Serialize(option, serializerOptions);
             string rawJson = JsonSerializer.Serialize(intVals, serializerOptions);
+
+            // assert
+            Assert.Equal(rawJson, optionJson);
+        }
+
+        [Fact]
+        public void IndexableOptionMultipleValues_WithSerializer_Newtonsoft_Added()
+        {
+            // arrange
+            int[] intVals = new[] { 1, 2, 3, 9 };
+            IndexableOption<int> option = new IndexableOption<int>(intVals);
+            Newtonsoft.Json.JsonSerializerSettings settings = new Newtonsoft.Json.JsonSerializerSettings();
+            settings.Converters.Add(new IndexableOptionConverterNewtonsoft());
+
+            // act
+            string optionJson = Newtonsoft.Json.JsonConvert.SerializeObject(option, settings);
+            string rawJson = Newtonsoft.Json.JsonConvert.SerializeObject(intVals, settings);
 
             // assert
             Assert.Equal(rawJson, optionJson);
