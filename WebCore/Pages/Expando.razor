@@ -8,7 +8,7 @@
 @code {
 public Object ToSerialize { get; private set; }
 
-protected sealed override void OnInit()
+protected sealed override void OnInitialized()
 {
     dynamic exp = new ExpandoObject();
     exp.FirstName = "My Name";
@@ -17,6 +17,6 @@ protected sealed override void OnInit()
     
     ToSerialize = exp;
 
-    base.OnInit();
+    base.OnInitialized();
 }
 }

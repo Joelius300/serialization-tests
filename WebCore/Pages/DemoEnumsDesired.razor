@@ -6,10 +6,10 @@
 @code {
 public Object ToSerialize { get; private set; }
 
-protected sealed override void OnInit()
+protected sealed override void OnInitialized()
 {
     ToSerialize = Utils.DemoObjects.Desired.DummyEnums;
 
-    base.OnInit();
+    base.OnInitialized();
 }
 }

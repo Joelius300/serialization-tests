@@ -6,7 +6,7 @@
 @code {
 public Object ToSerialize { get; private set; }
 
-protected sealed override void OnInit()
+protected sealed override void OnInitialized()
 {
     ToSerialize = new
     {
@@ -15,6 +15,6 @@ protected sealed override void OnInit()
         LastName = "My last name"
     };
 
-    base.OnInit();
+    base.OnInitialized();
 }
 }

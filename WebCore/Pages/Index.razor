@@ -10,11 +10,11 @@
     public Object Inner { get; private set; }
     public Object Outer { get; private set; }
 
-    protected sealed override void OnInit()
+    protected sealed override void OnInitialized()
     {
         Inner = Utils.DemoObjects.ContainerBug.DummyInnerContainer;
         Outer = Utils.DemoObjects.ContainerBug.DummyOuterContainer;
 
-        base.OnInit();
+        base.OnInitialized();
     }
 }

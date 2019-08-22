@@ -19,7 +19,7 @@
     public string Via_Text_Json { get; set; }
     public string Via_JsonDotNet { get; set; }
 
-    protected override async Task OnInitAsync()
+    protected override async Task OnInitializedAsync()
     {
         Via_JsonDotNet = ex.ResultOrExceptionMessage(SerializeNewtonsoft);
         //Via_JsonDotNet = ex.ResultOrExceptionMessage(() => Newtonsoft.Json.JsonConvert.SerializeObject(ObjectToSerialize));
@@ -27,7 +27,7 @@
         Via_Text_Json = ex.ResultOrExceptionMessage(SerializeSystemTextJson);
         //Via_Text_Json = ex.ResultOrExceptionMessage(() => JsonSerializer.Serialize(ObjectToSerialize));
 
-        await base.OnInitAsync();
+        await base.OnInitializedAsync();
 
         string SerializeNewtonsoft() => Newtonsoft.Json.JsonConvert.SerializeObject(
             ObjectToSerialize,
