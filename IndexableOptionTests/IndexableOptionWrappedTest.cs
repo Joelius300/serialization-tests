@@ -69,7 +69,7 @@ namespace IndexableOptionTests
         }
 
         [Fact]
-        public void Config_WithSerializer_GenericAdded()
+        public void Config_WithSerializer_Generic_Added()
         {
             // arrange
             string stringVal = "StringValue";
@@ -123,6 +123,36 @@ namespace IndexableOptionTests
 
             string rawStringJson = Newtonsoft.Json.JsonConvert.SerializeObject(stringVal, serializerOptions);
             string rawIntJson = Newtonsoft.Json.JsonConvert.SerializeObject(intVals, serializerOptions);
+
+            // assert
+            Assert.Contains(@$"""BackgroundColor"":{rawStringJson}", configJson);
+            Assert.Contains(@$"""BorderWidth"":{rawIntJson}", configJson);
+        }
+
+        [Fact]
+        public void Config_WithSerializer_Factory_Added()
+        {
+            // arrange
+            string stringVal = "StringValue";
+            int[] intVals = new[] { 7, 1, 5 };
+
+            IndexableOption<string> stringOption = new IndexableOption<string>(stringVal);
+            IndexableOption<int> intOption = new IndexableOption<int>(intVals);
+
+            Config config = new Config
+            {
+                BackgroundColor = stringOption,
+                BorderWidth = intOption
+            };
+
+            var serializerOptions = new JsonSerializerOptions();
+            serializerOptions.Converters.Add(new IndexableOptionConverterFactory());
+
+            // act
+            string configJson = JsonSerializer.Serialize(config, serializerOptions);
+
+            string rawStringJson = JsonSerializer.Serialize(stringVal, serializerOptions);
+            string rawIntJson = JsonSerializer.Serialize(intVals, serializerOptions);
 
             // assert
             Assert.Contains(@$"""BackgroundColor"":{rawStringJson}", configJson);

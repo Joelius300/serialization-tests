@@ -9,6 +9,7 @@ namespace IndexableOptionTests.TestClasses
     /// </summary>
     /// <typeparam name="T">The type of data this <see cref="IndexableOption{T}"/> is supposed to hold.</typeparam>
     // [Newtonsoft.Json.JsonConverter(typeof(Converters.IndexableOptionConverterNewtonsoft))] <-- this works :)
+    // [System.Text.Json.Serialization.JsonConverter(typeof(Converters.IndexableOptionConverterFactory))] <-- works as well
     public sealed class IndexableOption<T>
     {
         public const string PropertyName = nameof(Value);
