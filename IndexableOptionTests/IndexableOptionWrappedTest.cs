@@ -70,7 +70,7 @@ namespace IndexableOptionTests
         }
 
         [Fact]
-        public void Config_WithSerializer_Newtonsoft_Addded()
+        public void Config_WithSerializer_Newtonsoft_Added()
         {
             // arrange
             string stringVal = "StringValue";

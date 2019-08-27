@@ -11,12 +11,15 @@ namespace IndexableOptionTests
     {
         #region Single value
 
+        private string DummyStringValue => "StringValue";
+
         [Fact]
-        public void IndexableOptionSingleValue_NothingCustom()
+        public void SingleValue_NothingCustom()
         {
             // arrange
-            string stringVal = "StringValue";
-            IndexableOption<string> option = new IndexableOption<string>(stringVal);
+            string stringVal = DummyStringValue;
+            IndexableOption<string> option = new IndexableOption<string>(DummyStringValue);
+
             var serializerOptions = new JsonSerializerOptions();
 
             // act
@@ -30,11 +33,11 @@ namespace IndexableOptionTests
 
 
         [Fact]
-        public void IndexableOptionSingleValue_WithSerializer_GenericAdded()
+        public void SingleValue_WithSerializer_Generic_Added()
         {
             // arrange
-            string stringVal = "StringValue";
-            IndexableOption<string> option = new IndexableOption<string>(stringVal);
+            string stringVal = DummyStringValue;
+            IndexableOption<string> option = new IndexableOption<string>(DummyStringValue);
 
             var serializerOptions = new JsonSerializerOptions();
             serializerOptions.Converters.Add(new IndexableOptionConverterGeneric<string>());
@@ -48,11 +51,12 @@ namespace IndexableOptionTests
         }
 
         [Fact]
-        public void IndexableOptionSingleValue_WithSerializer_Newtonsoft_Added()
+        public void SingleValue_WithSerializer_Newtonsoft_Added()
         {
             // arrange
-            string stringVal = "StringValue";
-            IndexableOption<string> option = new IndexableOption<string>(stringVal);
+            string stringVal = DummyStringValue;
+            IndexableOption<string> option = new IndexableOption<string>(DummyStringValue);
+
             Newtonsoft.Json.JsonSerializerSettings settings = new Newtonsoft.Json.JsonSerializerSettings();
             settings.Converters.Add(new IndexableOptionConverterNewtonsoft());
 
@@ -65,11 +69,11 @@ namespace IndexableOptionTests
         }
 
         [Fact]
-        public void IndexableOptionSingleValue_WithSerializer_Factory_Added()
+        public void SingleValue_WithSerializer_Factory_Added()
         {
             // arrange
-            string stringVal = "StringValue";
-            IndexableOption<string> option = new IndexableOption<string>(stringVal);
+            string stringVal = DummyStringValue;
+            IndexableOption<string> option = new IndexableOption<string>(DummyStringValue);
 
             var serializerOptions = new JsonSerializerOptions();
             serializerOptions.Converters.Add(new IndexableOptionConverterFactory());
@@ -86,12 +90,15 @@ namespace IndexableOptionTests
 
         #region Multiple values
 
+        private int[] DummyIntArray => new[] { 1, 2, 3, 9 };
+
         [Fact]
-        public void IndexableOptionMultipleValues_NothingCustom()
+        public void MultipleValues_NothingCustom()
         {
             // arrange
-            int[] intVals = new[] { 1, 2, 3, 9 };
-            IndexableOption<int> option = new IndexableOption<int>(intVals);
+            int[] intVals = DummyIntArray;
+            IndexableOption<int> option = new IndexableOption<int>(DummyIntArray);
+
             var serializerOptions = new JsonSerializerOptions();
 
             // act
@@ -104,11 +111,12 @@ namespace IndexableOptionTests
         }
 
         [Fact]
-        public void IndexableOptionMultipleValues_WithSerializer_Generic_Added()
+        public void MultipleValues_WithSerializer_Generic_Added()
         {
             // arrange
-            int[] intVals = new[] { 1, 2, 3, 9 };
-            IndexableOption<int> option = new IndexableOption<int>(intVals);
+            int[] intVals = DummyIntArray;
+            IndexableOption<int> option = new IndexableOption<int>(DummyIntArray);
+
             var serializerOptions = new JsonSerializerOptions();
             serializerOptions.Converters.Add(new IndexableOptionConverterGeneric<int>());
 
@@ -121,11 +129,12 @@ namespace IndexableOptionTests
         }
 
         [Fact]
-        public void IndexableOptionMultipleValues_WithSerializer_Newtonsoft_Added()
+        public void MultipleValues_WithSerializer_Newtonsoft_Added()
         {
             // arrange
-            int[] intVals = new[] { 1, 2, 3, 9 };
-            IndexableOption<int> option = new IndexableOption<int>(intVals);
+            int[] intVals = DummyIntArray;
+            IndexableOption<int> option = new IndexableOption<int>(DummyIntArray);
+
             Newtonsoft.Json.JsonSerializerSettings settings = new Newtonsoft.Json.JsonSerializerSettings();
             settings.Converters.Add(new IndexableOptionConverterNewtonsoft());
 
@@ -138,11 +147,12 @@ namespace IndexableOptionTests
         }
 
         [Fact]
-        public void IndexableOptionMultipleValues_WithSerializer_Factory_Added()
+        public void MultipleValues_WithSerializer_Factory_Added()
         {
             // arrange
-            int[] intVals = new[] { 1, 2, 3, 9 };
-            IndexableOption<int> option = new IndexableOption<int>(intVals);
+            int[] intVals = DummyIntArray;
+            IndexableOption<int> option = new IndexableOption<int>(DummyIntArray);
+
             var serializerOptions = new JsonSerializerOptions();
             serializerOptions.Converters.Add(new IndexableOptionConverterFactory());
 
