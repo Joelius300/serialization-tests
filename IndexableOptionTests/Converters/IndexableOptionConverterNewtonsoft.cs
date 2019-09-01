@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Reflection;
 
 namespace IndexableOptionTests.Converters
 {
@@ -29,9 +30,25 @@ namespace IndexableOptionTests.Converters
             // JProperty prop = o.Property(IndexableOption<object>.PropertyName);
             // prop.Value.WriteTo(writer);
 
-            // get the value using reflection and write it out
-            object toWrite = value.GetType().GetProperty(IndexableOption<object>.PropertyName).GetValue(value);
-            JToken.FromObject(toWrite).WriteTo(writer);
+            var prop = value.GetType().GetProperty(IndexableOption<object>.PropertyName, BindingFlags.Instance | BindingFlags.NonPublic);
+
+            try
+            {
+                // if the indexable option was not initialized, this will throw an InvalidOperationException
+                object toWrite = prop.GetValue(value);
+
+                // write the property
+                JToken.FromObject(toWrite).WriteTo(writer);
+            }
+            catch (TargetInvocationException oex) 
+                when (oex.InnerException is InvalidOperationException iex)
+            {
+                Console.WriteLine("Error while trying to serialize an indexable option:");
+                Console.WriteLine(iex.Message);
+
+                // non-defined value
+                writer.WriteUndefined();
+            }
         }
     }
 }

@@ -16,7 +16,7 @@ namespace IndexableOptionTests.Converters
 
         public override void Write(Utf8JsonWriter writer, IndexableOption<T> value, JsonSerializerOptions options)
         {
-            JsonSerializer.Serialize(writer, value.Value, value.Value.GetType(), options);
+            JsonSerializer.Serialize(writer, value.BoxedValue, value.BoxedValue.GetType(), options);
         }
     }
 }

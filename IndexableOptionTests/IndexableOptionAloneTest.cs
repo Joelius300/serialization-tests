@@ -14,25 +14,6 @@ namespace IndexableOptionTests
         private string DummyStringValue => "StringValue";
 
         [Fact]
-        public void SingleValue_NothingCustom()
-        {
-            // arrange
-            string stringVal = DummyStringValue;
-            IndexableOption<string> option = new IndexableOption<string>(DummyStringValue);
-
-            var serializerOptions = new JsonSerializerOptions();
-
-            // act
-            string optionJson = JsonSerializer.Serialize(option, serializerOptions);
-            string rawJson = JsonSerializer.Serialize(stringVal, serializerOptions);
-
-            // assert
-            Assert.Equal(@$"{{""Value"":{rawJson}}}", optionJson);
-            Assert.NotEqual(rawJson, optionJson);
-        }
-
-
-        [Fact]
         public void SingleValue_WithSerializer_Generic_Added()
         {
             // arrange
@@ -91,24 +72,6 @@ namespace IndexableOptionTests
         #region Multiple values
 
         private int[] DummyIntArray => new[] { 1, 2, 3, 9 };
-
-        [Fact]
-        public void MultipleValues_NothingCustom()
-        {
-            // arrange
-            int[] intVals = DummyIntArray;
-            IndexableOption<int> option = new IndexableOption<int>(DummyIntArray);
-
-            var serializerOptions = new JsonSerializerOptions();
-
-            // act
-            string optionJson = JsonSerializer.Serialize(option, serializerOptions);
-            string rawJson = JsonSerializer.Serialize(intVals, serializerOptions);
-
-            // assert
-            Assert.Equal(@$"{{""Value"":{rawJson}}}", optionJson);
-            Assert.NotEqual(rawJson, optionJson);
-        }
 
         [Fact]
         public void MultipleValues_WithSerializer_Generic_Added()
